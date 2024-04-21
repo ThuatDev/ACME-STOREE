@@ -1,49 +1,59 @@
-import React from 'react'
+/* eslint-disable prettier/prettier */
+import React, { useEffect, useState } from 'react'
+import { Link, Outlet, useLocation } from 'react-router-dom'
+import ProductItem from './ProductItem'
 
-export default function ProductList() {
+interface ProductListCategory {
+  id: number
+  title: string
+  price: number
+  description: string
+  category: string
+  image: string
+  rating: [
+    {
+      rate: number
+      count: number
+    }
+  ]
+}
+
+interface ProductListProps {
+  selectedCategory: string | null // Kiểu dữ liệu của selectedCategory
+}
+
+const ProductList = ({ selectedCategory }: ProductListProps) => {
+  const [products, setProducts] = useState<ProductListCategory[]>([]) // Sử dụng kiểu dữ liệu của ProductListCategory
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products')
+        const data = await response.json()
+        setProducts(data)
+        setLoading(false)
+      } catch (error) {
+        console.log('error fetching data', error)
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  const filterProducts = products.filter((product: ProductListCategory) =>
+    selectedCategory ? product.category === selectedCategory : true
+  )
+  console.log('filterProducts>>', products)
+
   return (
-    <div className='container-2xl'>
-      <div className='grid grid-cols-12'>
-        <div className='col-span-2 bg-slate-800'>sadasdasdsadasd</div>
-        <div className='col-span-8 bg-slate-800 text-center'>
-          <div className='grid grid-cols-3 gap-2'>
-            {/* Sản phẩm 1 */}
-            <div className='p-2  rounded-lg border'>
-              <img src='https://via.placeholder.com/376' className='w-full' alt='Product 1' />
-              {/* Thêm thông tin sản phẩm 1 tại đây */}
-            </div>
-
-            {/* Sản phẩm 2 */}
-            <div className=' p-2  rounded-lg border  rounded-lg border'>
-              <img src='https://via.placeholder.com/376' alt='Product 2' />
-              {/* Thêm thông tin sản phẩm 2 tại đây */}
-            </div>
-
-            {/* Sản phẩm 3 */}
-            <div className='b p-2  rounded-lg border  rounded-lg border'>
-              <img src='https://via.placeholder.com/376' alt='Product 3' />
-              {/* Thêm thông tin sản phẩm 3 tại đây */}
-            </div>
-            <div className='p-2  rounded-lg border  rounded-lg border '>
-              <img src='https://via.placeholder.com/376' alt='Product 1' />
-              {/* Thêm thông tin sản phẩm 1 tại đây */}
-            </div>
-
-            {/* Sản phẩm 2 */}
-            <div className=' p-2  rounded-lg border  rounded-lg border'>
-              <img src='https://via.placeholder.com/376' alt='Product 2' />
-              {/* Thêm thông tin sản phẩm 2 tại đây */}
-            </div>
-
-            {/* Sản phẩm 3 */}
-            <div className='b p-2  rounded-lg border'>
-              <img src='https://via.placeholder.com/376' alt='Product 3' />
-              {/* Thêm thông tin sản phẩm 3 tại đây */}
-            </div>
-          </div>
-        </div>
-        <div className='col-span-2 bg-slate-800'>sadasdasdsadasd</div>
-      </div>
+    <div className='order-last min-h-screen w-full md:order-none'>
+      <ul className='grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'>
+        {filterProducts.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </ul>
     </div>
   )
 }
+export default ProductList

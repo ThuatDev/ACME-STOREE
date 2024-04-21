@@ -10,6 +10,12 @@ interface Product {
   description: string
   category: string
   image: string
+  rating: [
+    {
+      rate: number
+      count: number
+    }
+  ]
 }
 export default function Home() {
   const [products, setProducts] = useState([] as Product[])
@@ -32,10 +38,9 @@ export default function Home() {
     <>
       <section className='mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 [&>*:nth-child(1)]:md:col-span-4 [&>*:nth-child(1)]:md:row-span-2 [&>*:nth-child(2)]:md:col-span-2 [&>*:nth-child(2)]:md:row-span-1 [&>*:nth-child(3)]:md:col-span-2 [&>*:nth-child(3)]:md:row-span-1'>
         {products.map((product) => (
-          <div key={product.id} >
+          <div key={product.id}>
             <Link className='relative block aspect-square h-full w-full' to='/'>
               <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800'>
-                
                 <img
                   className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105 editImage'
                   src={product.image}
@@ -44,7 +49,9 @@ export default function Home() {
                 <div className='absolute bottom-0 left-0 flex w-full px-4 pb-4 @container/label'>
                   <div className='flex items-center rounded-full border bg-white/70 p-1 text-xs font-semibold text-black backdrop-blur-md dark:border-neutral-800 dark:bg-black/70 dark:text-white'>
                     <h3 className='mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight'>{product.title}</h3>
-                    <p className='flex-none rounded-full bg-blue-600 p-2 text-white'>${product.price}</p>
+                    <p className='flex-none rounded-full bg-blue-600 p-2 text-white'>${product.price}
+                    <span className='ml-1 inline @[275px]/label:inline'>USD</span>
+                    </p>
                   </div>
                 </div>
               </div>

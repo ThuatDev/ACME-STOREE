@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import { useSearch } from './SearchContext'
 const Header = () => {
+  const { updateSearchKeyword } = useSearch()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const [searchValue, setSearchValue] = useState('')
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
+    console.log('searchValue:', searchValue)
+  }
 
-    console.log('Search value:', e.target.value)
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    updateSearchKeyword(searchValue)
   }
 
   return (
@@ -57,7 +62,7 @@ const Header = () => {
           </button>
         </div>
         <div
-          className={`z-50 fixed space-y-4 px-4 mt-16 py-7 flex h-full w-full flex-col bg-white pb-6 dark:bg-black ${
+          className={`z-50 fixed space-y-4 px-4 mt-16 py-7 flex h-full w-full flex-col bg-white pb-6 dark:bg-black md:hidden ${
             isMenuOpen ? 'block fixed top-0 left-0 right-0' : 'hidden'
           }`}
         >
@@ -66,10 +71,10 @@ const Header = () => {
               <input
                 placeholder='Search for products...'
                 autoComplete='off'
-                className='w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400'
+                className='w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400  '
                 type='text'
                 value={searchValue}
-                onChange={handleSearchChange} // Add onChange handler here
+                onChange={handleSearchChange}
                 name='search'
               />
               <div className='absolute right-0 top-0 mr-3 flex h-full items-center'>
@@ -176,7 +181,7 @@ const Header = () => {
               <input
                 type='text'
                 value={searchValue}
-                onChange={handleSearchChange} //
+                onChange={handleSearchChange}
                 placeholder='Search for products...'
                 autoComplete='off'
                 className='w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:to-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400'

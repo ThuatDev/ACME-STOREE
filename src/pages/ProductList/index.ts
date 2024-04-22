@@ -1,3 +1,4 @@
-import ProductList from './ProductList'
+import MainProduct from './MainProduct'
 
-export default ProductList
+
+export default MainProduct

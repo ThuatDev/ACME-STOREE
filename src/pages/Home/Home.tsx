@@ -66,7 +66,7 @@ export default function Home() {
         ) : (
           products.map((product) => (
             <div key={product.id}>
-              <Link className='relative block aspect-square h-full w-full' to='/'>
+              <Link className='relative block aspect-square h-full w-full' to={`/product/${product.id}`}>
                 <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800'>
                   <img
                     className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105 editImage'

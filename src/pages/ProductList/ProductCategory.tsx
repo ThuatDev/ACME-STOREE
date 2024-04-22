@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
-const ProductCategory = (setSelectedCategory: any) => {
+const ProductCategory = ({ setSelectedCategory }: { setSelectedCategory: any }) => {
   const [productCategory, setProductCategory] = useState<string[]>([])
-  const [active, setActive] = useState(false);
-
+  const [active, setActive] = useState(false)
 
   useEffect(() => {
     const fetchProductCategory = async () => {
@@ -21,7 +20,7 @@ const ProductCategory = (setSelectedCategory: any) => {
   }, [])
 
   const handleClickCategory = (category: string) => {
-    setSelectedCategory(category)
+    setSelectedCategory(category === 'All' ? '' : category) // Nếu là "All", đặt selectedCategory là null
   }
 
   return (

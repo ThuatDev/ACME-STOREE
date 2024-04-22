@@ -67,7 +67,7 @@ const Header = () => {
           }`}
         >
           <div className='mb-4 w-full'>
-            <form className='w-max-[550px] relative w-full lg:w-80 xl:w-full'>
+            <form className='w-max-[550px] relative w-full lg:w-80 xl:w-full' onSubmit={handleSearchSubmit}>
               <input
                 placeholder='Search for products...'
                 autoComplete='off'
@@ -177,7 +177,7 @@ const Header = () => {
             </ul>
           </div>
           <div className='hidden justify-center md:flex md:w-1/3'>
-            <form action='' className='w-max-[500px] relative w-full  lg:w-80 xl:w-full'>
+            <form action='' className='w-max-[500px] relative w-full  lg:w-80 xl:w-full' onSubmit={handleSearchSubmit}>
               <input
                 type='text'
                 value={searchValue}

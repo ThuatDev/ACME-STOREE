@@ -21,16 +21,14 @@ const MainProduct = () => {
   }, [selectedCategory, setSearchParams, searchParams, navigate])
 
   return (
-    <SearchProvider>
-      {' '}
+    <>
       {/* Bọc Header trong SearchProvider */}
       <div className='mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 pb-4 text-black md:flex-row dark:text-white '>
         <ProductCategory setSelectedCategory={setSelectedCategory} />
         <ProductList selectedCategory={selectedCategory} />
-        <Outlet />
         <ProductSort />
       </div>
-    </SearchProvider>
+    </>
   )
 }
 

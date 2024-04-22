@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSearch } from './SearchContext'
 const Header = () => {
   const { updateSearchKeyword } = useSearch()
@@ -14,10 +14,19 @@ const Header = () => {
     setSearchValue(e.target.value)
     console.log('searchValue:', searchValue)
   }
-
+  const navigate = useNavigate()
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    //  KHI NGƯỜI DÙNG SUBMIT FORM, GỌI HÀM updateSearchKeyword VỚI THAM SỐ LÀ searchValue VÀ CHUYỂN TRANG VỀ /list-products
     updateSearchKeyword(searchValue)
+    setSearchValue('')
+    // CHUYỂN TRANG NHƯNG KHÔNG LÀM MẤT DỮ LIỆU TRÊN TRANG HIỆN TẠI (KHÔNG REFRESH TRANG)
+    // chuyển qua trang list-products nhưng không làm mất dữ liệu trên trang hiện tại (không refresh trang)
+    // ĐỔI URL NHƯNG KHÔNG REFRESH TRANG react router dom v6  viêt code giup toi
+    // use history.push('/list-products')
+    navigate('/list-products')
+
+    // TẠI SAO NÓ ĐỔI URL RỒI MÀ KHÔNG CHUYỂN SANG TRANG list-products ?
   }
 
   return (

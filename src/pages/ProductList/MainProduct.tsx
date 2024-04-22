@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ProductCategory from './ProductCategory'
 import { useSearchParams, useNavigate, Outlet } from 'react-router-dom'
 import ProductList from './ProductList'
-import ProductSort from '../../ProductSort'
+import ProductSort from './ProductSort'
 
 const MainProduct = () => {
   const [searchParams, setSearchParams] = useSearchParams()

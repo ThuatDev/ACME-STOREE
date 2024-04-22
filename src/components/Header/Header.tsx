@@ -11,6 +11,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  
   return (
     <header>
       <nav className='relative flex items-center justify-between p-4 lg:px-6'>
@@ -51,10 +52,7 @@ const Header = () => {
               </svg>
             )}
           </button>
-        </div>
-        {/* item for- mobile */}
-
-        {/* <div
+          <div
           className={`z-50 fixed space-y-4 px-4 mt-16 py-7 flex h-full w-full flex-col bg-white pb-6 dark:bg-black ${
             isMenuOpen ? 'block fixed top-0 left-0 right-0' : 'hidden'
           }`}
@@ -95,7 +93,7 @@ const Header = () => {
                 to={'/list-products'}
                 className='text-white underline-offset-4 hover:text-black hover:underline  dark:hover:text-neutral-300'
               >
-                WW
+                All
               </Link>
             </li>
             <li>
@@ -115,7 +113,13 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-        </div> */}
+        </div>
+        </div>
+        {/* item for- mobile */}
+
+        
+
+        {/* item for desktop */}
         <div className='flex w-full items-center'>
           <div className='flex w-full md:w-1/3'>
             <Link

@@ -215,7 +215,7 @@ const Productdetail = () => {
         </div>
         <div className='py-8'>
         <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-        <ul className='flex animate-carousel gap-4'>
+        <ul className='flex  gap-4 overflow-x-auto'>
           <li className='aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5'>
             <Link className='relative h-full w-full' to='/'>
               <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800'>

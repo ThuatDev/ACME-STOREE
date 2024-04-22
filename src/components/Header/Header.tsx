@@ -53,24 +53,49 @@ const Header = () => {
           </button>
         </div>
         {/* item for- mobile */}
-        
-        <div
+
+        {/* <div
           className={`z-50 fixed space-y-4 px-4 mt-16 py-7 flex h-full w-full flex-col bg-white pb-6 dark:bg-black ${
             isMenuOpen ? 'block fixed top-0 left-0 right-0' : 'hidden'
           }`}
         >
-            <div className="mb-4 w-full">
-            <form className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
-                <input placeholder="Search for products..." autoComplete="off" className="w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400" type="text" value="" name="search" />
-                <div className="absolute right-0 top-0 mr-3 flex h-full items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-4"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path></svg></div></form>
-        </div>
+          <div className='mb-4 w-full'>
+            <form className='w-max-[550px] relative w-full lg:w-80 xl:w-full'>
+              <input
+                placeholder='Search for products...'
+                autoComplete='off'
+                className='w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400'
+                type='text'
+                value=''
+                name='search'
+              />
+              <div className='absolute right-0 top-0 mr-3 flex h-full items-center'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  strokeWidth='1.5'
+                  stroke='currentColor'
+                  aria-hidden='true'
+                  data-slot='icon'
+                  className='h-4'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
+                  ></path>
+                </svg>
+              </div>
+            </form>
+          </div>
           <ul className='flex w-full flex-col md:items-center'>
             <li>
               <Link
-                to='/'
+                to={'/list-products'}
                 className='text-white underline-offset-4 hover:text-black hover:underline  dark:hover:text-neutral-300'
               >
-                All
+                WW
               </Link>
             </li>
             <li>
@@ -90,7 +115,7 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-        </div>
+        </div> */}
         <div className='flex w-full items-center'>
           <div className='flex w-full md:w-1/3'>
             <Link
@@ -113,10 +138,10 @@ const Header = () => {
             <ul className='hidden gap-6 text-sm md:flex md:items-center'>
               <li>
                 <Link
-                  to='/'
+                  to='/list-products'
                   className='text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300'
                 >
-                  All
+                  ALL
                 </Link>
               </li>
               <li>

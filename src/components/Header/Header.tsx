@@ -13,6 +13,7 @@ const Header = () => {
     // Kiểm tra nếu đường dẫn là trang chính, xóa từ khóa tìm kiếm
     if (location.pathname === '/') {
       setSearchValue('')
+
       clearSearchKeyword()
     }
   }, [location.pathname, clearSearchKeyword])
@@ -29,6 +30,7 @@ const Header = () => {
     e.preventDefault()
     // Gọi hàm updateSearchKeyword để cập nhật từ khóa tìm kiếm
     updateSearchKeyword(searchValue)
+    console.log('searchValue', searchValue)
     // setSearchValue('')
     // Chuyển qua trang list-products và bao gồm từ khóa tìm kiếm trong URL
     navigate(`/list-products?search=${encodeURIComponent(searchValue)}`)

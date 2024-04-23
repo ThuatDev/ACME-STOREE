@@ -10,7 +10,7 @@ const SearchContext = createContext<SearchContextProps | undefined>(undefined)
 
 export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [searchKeyword, setSearchKeyword] = useState('')
-
+  console.log('searchKeyword', searchKeyword)
   const updateSearchKeyword = (keyword: string) => {
     setSearchKeyword(keyword)
   }

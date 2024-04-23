@@ -40,12 +40,10 @@ const ProductCategory: React.FC<ProductCategoryProps> = ({ setSelectedCategory }
             <li className='mt-2 flex text-black dark:text-white' key={index}>
               <NavLink
                 to={category === 'All' ? '/list-products' : `/list-products?category=${category}`}
-                className='w-full text-sm underline-offset-4 hover:underline capitalize'
+                className={`w-full text-sm underline-offset-4 hover:underline capitalize ${
+                  selectedCategory === category ? ' font-bold underline' : ''
+                }`}
                 onClick={() => handleClickCategory(category)}
-                style={{
-                  textDecorationColor: selectedCategory === category ? '#22D3EE' : 'transparent',
-                  textDecoration: selectedCategory === category ? 'underline' : 'none'
-                }}
               >
                 {category}
               </NavLink>

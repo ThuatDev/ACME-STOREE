@@ -27,12 +27,15 @@ const ProductDetail = () => {
     }
   }
   const { id } = useParams()
+  const productId = (id as string).split('-').pop() // Lấy id từ phần cuối của URL
+  console.log('productId:', productId)
   const [product, setProduct] = useState<Product | null>(null)
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`)
+        const response = await fetch(`https://fakestoreapi.com/products/${productId}`)
+        console.log('response-detail:', response)
         if (!response.ok) {
           throw new Error('Failed to fetch product')
         }
@@ -44,8 +47,8 @@ const ProductDetail = () => {
     }
 
     fetchProduct()
-  }, [id])
-
+  }, [productId])
+  fetch(`https://fakestoreapi.com/products/${id}`)
   return (
     <>
       <div className='mx-auto max-w-screen-2xl px-4'>

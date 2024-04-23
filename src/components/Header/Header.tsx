@@ -20,12 +20,8 @@ const Header = () => {
     //  KHI NGƯỜI DÙNG SUBMIT FORM, GỌI HÀM updateSearchKeyword VỚI THAM SỐ LÀ searchValue VÀ CHUYỂN TRANG VỀ /list-products
     updateSearchKeyword(searchValue)
     setSearchValue('')
-    // CHUYỂN TRANG NHƯNG KHÔNG LÀM MẤT DỮ LIỆU TRÊN TRANG HIỆN TẠI (KHÔNG REFRESH TRANG)
     // chuyển qua trang list-products nhưng không làm mất dữ liệu trên trang hiện tại (không refresh trang)
-    // ĐỔI URL NHƯNG KHÔNG REFRESH TRANG react router dom v6  viêt code giup toi
-    // use history.push('/list-products')
-    navigate('/list-products')
-
+    navigate(`/list-products?search=${encodeURIComponent(searchValue)}`) // Include search keyword in the URL
     // TẠI SAO NÓ ĐỔI URL RỒI MÀ KHÔNG CHUYỂN SANG TRANG list-products ?
   }
 

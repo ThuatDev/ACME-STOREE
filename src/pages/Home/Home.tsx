@@ -54,6 +54,14 @@ export default function Home() {
       console.error('Error fetching data:', error)
     }
   }
+  const slug = products
+    .map((product) => product.title)
+    .join('')
+    .toLowerCase()
+    .replace(/[^\w\s]/g, '') // Loại bỏ các ký tự đặc biệt
+    .replace(/\s+/g, '-') // Thay thế khoảng trắng bằng dấu gạch nối
+    .replace(/-+/g, '-') // Loại bỏ các dấu gạch nối liên tiếp
+    .trim() // Loại bỏ các khoảng trắng ở đầu và cuối chuỗi
   return (
     <>
       <section className='mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 [&>*:nth-child(1)]:md:col-span-4 [&>*:nth-child(1)]:md:row-span-2 [&>*:nth-child(2)]:md:col-span-2 [&>*:nth-child(2)]:md:row-span-1 [&>*:nth-child(3)]:md:col-span-2 [&>*:nth-child(3)]:md:row-span-1'>
@@ -66,7 +74,15 @@ export default function Home() {
         ) : (
           products.map((product) => (
             <div key={product.id}>
-              <Link className='relative block aspect-square h-full w-full' to={`/product/${product.id}`}>
+              <Link
+                className='relative block aspect-square h-full w-full'
+                to={`/product/${product.title
+                  .toLowerCase()
+                  .replace(/[^\w\s]/g, '')
+                  .replace(/\s+/g, '-')
+                  .replace(/-+/g, '-')
+                  .trim()}-${product.id}`}
+              >
                 <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800'>
                   <img
                     className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105 editImage'

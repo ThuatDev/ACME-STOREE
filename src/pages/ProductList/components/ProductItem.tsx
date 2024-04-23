@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 
 const ProductItem = ({ product }: { product: any }) => {
   //   console.log('ProductItem.js', product)
-
+  const slug = product.title
+    .toLowerCase()
+    .replace(/[^\w\s]/g, '') // Loại bỏ các ký tự đặc biệt
+    .replace(/\s+/g, '-') // Thay thế khoảng trắng bằng dấu gạch nối
+    .replace(/-+/g, '-') // Loại bỏ các dấu gạch nối liên tiếp
+    .trim() // Loại bỏ các khoảng trắng ở đầu và cuối chuỗi
   return (
     <li key={product.id} className='aspect-square transition-opacity animate-fadeIn'>
-      <Link to={`/product/${product.id}`} className='relative inline-block h-full w-full'>
+      <Link to={`/product/${slug}-${product.id}`} className='relative inline-block h-full w-full'>
         <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800'>
           <img
             className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105'

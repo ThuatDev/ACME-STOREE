@@ -1,28 +1,39 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSearch } from './SearchContext'
+
 const Header = () => {
-  const { updateSearchKeyword } = useSearch()
+  const { updateSearchKeyword, clearSearchKeyword } = useSearch()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    // Kiểm tra nếu đường dẫn là trang chính, xóa từ khóa tìm kiếm
+    if (location.pathname === '/') {
+      setSearchValue('')
+      clearSearchKeyword()
+    }
+  }, [location.pathname, clearSearchKeyword])
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const [searchValue, setSearchValue] = useState('')
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
-    console.log('searchValue:', searchValue)
   }
-  const navigate = useNavigate()
+
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    //  KHI NGƯỜI DÙNG SUBMIT FORM, GỌI HÀM updateSearchKeyword VỚI THAM SỐ LÀ searchValue VÀ CHUYỂN TRANG VỀ /list-products
+    // Gọi hàm updateSearchKeyword để cập nhật từ khóa tìm kiếm
     updateSearchKeyword(searchValue)
-    setSearchValue('')
-    // chuyển qua trang list-products nhưng không làm mất dữ liệu trên trang hiện tại (không refresh trang)
-    navigate(`/list-products?search=${encodeURIComponent(searchValue)}`) // Include search keyword in the URL
-    // TẠI SAO NÓ ĐỔI URL RỒI MÀ KHÔNG CHUYỂN SANG TRANG list-products ?
+    // setSearchValue('')
+    // Chuyển qua trang list-products và bao gồm từ khóa tìm kiếm trong URL
+    navigate(`/list-products?search=${encodeURIComponent(searchValue)}`)
+    // khi từ list-products trở về trang chủ thì xóa từ khóa tìm kiếm trên input
+    //  phải là từ trang khác trở về trang chủ thì mới xóa từ khóa tìm kiếm
   }
 
   return (

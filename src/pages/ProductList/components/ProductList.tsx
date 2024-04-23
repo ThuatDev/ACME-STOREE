@@ -43,18 +43,24 @@ const ProductList = ({ selectedCategory }: ProductListProps) => {
     fetchData()
   }, [])
 
-  let filteredProducts = products
+  // let filteredProducts = products
+  // search theo category và searchKeyword dù không có searchKeyword thì vẫn lọc theo category dc
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title.toLowerCase().includes(searchKeyword.toLowerCase()) &&
+      (!selectedCategory || product.category === selectedCategory)
+  )
 
-  if (searchKeyword && searchKeyword.trim() !== '') {
-    filteredProducts = products.filter((product) => {
-      if (selectedCategory) {
-        return product.category === selectedCategory
-      } else {
-        return product.title.toLowerCase().includes(searchKeyword.toLowerCase())
-      }
-    })
-  }
-
+  // v2
+  // if (searchKeyword && searchKeyword.trim() !== '') {
+  //   filteredProducts = products.filter((product) => {
+  //     if (selectedCategory) {
+  //       return product.category === selectedCategory
+  //     } else {
+  //       return product.title.toLowerCase().includes(searchKeyword.toLowerCase())
+  //     }
+  //   })
+  // }
   return (
     <div className='order-last min-h-screen w-full md:order-none'>
       {loading && <p className='text-center'>Loading...</p>}

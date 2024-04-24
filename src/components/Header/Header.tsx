@@ -1,14 +1,52 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useSearch } from './SearchContext'
 import CartItem from '../Cart/CartItem'
 import HomeMobile from './HeaderModal'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openCart, setOpenCart] = useState(false)
+  const { updateSearchKeyword, clearSearchKeyword } = useSearch()
   // const tongleMenu
 
+  //  su ly logic search
+  const [searchValue, setSearchValue] = useState('')
+  const navigate = useNavigate()
+  const location = useLocation()
+  // bat du xu ly
+  useEffect(() => {
+    // Kiểm tra nếu đường dẫn là trang chính, xóa từ khóa tìm kiếm
+    if (location.pathname === '/') {
+      setSearchValue('')
+
+      clearSearchKeyword()
+    }
+  }, [location.pathname, clearSearchKeyword])
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('searchVawwlue', e.target.value)
+    setSearchValue(e.target.value)
+  }
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // Gọi hàm updateSearchKeyword để cập nhật từ khóa tìm kiếm
+    updateSearchKeyword(searchValue)
+    console.log('searchValue', searchValue)
+    // setSearchValue('')
+    // Chuyển qua trang list-products và bao gồm từ khóa tìm kiếm trong URL
+    tongleMenu()
+    navigate(`/list-products?search=${encodeURIComponent(searchValue)}`)
+    // khi từ list-products trở về trang chủ thì xóa từ khóa tìm kiếm trên input
+    //  phải là từ trang khác trở về trang chủ thì mới xóa từ khóa tìm kiếm
+  }
+  // end
   const tongleMenu = () => {
     setIsMenuOpen(false)
   }
@@ -21,7 +59,10 @@ const Header = () => {
     <header>
       <nav className='relative flex items-center justify-between p-4 lg:px-6 '>
         {/* item for- mobile */}
-        <button className='flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white ' onClick={() => setIsMenuOpen(true)}>
+        <button
+          className='flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white '
+          onClick={() => setIsMenuOpen(true)}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -35,9 +76,15 @@ const Header = () => {
             <path strokeLinecap='round' strokeLinejoin='round' d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'></path>
           </svg>
         </button>
-      {/* dialog mobile component  */}
-      <HomeMobile openMenuDialog={isMenuOpen} handleClose={tongleMenu} />
-      {/* /////////////////////// */}
+        {/* dialog mobile component  */}
+        <HomeMobile
+          openMenuDialog={isMenuOpen}
+          handleClose={tongleMenu}
+          handleSearchChange={handleSearchChange}
+          handleSearchSubmit={handleSearchSubmit}
+          searchValue={searchValue}
+        />
+
         {/* item for desktop */}
         <div className='flex w-full items-center'>
           <div className='flex w-full md:w-1/3'>
@@ -86,11 +133,13 @@ const Header = () => {
             </ul>
           </div>
           <div className='hidden justify-center md:flex md:w-1/3'>
-            <form action='' className='w-max-[500px] relative w-full  lg:w-80 xl:w-full'>
+            <form action='' className='w-max-[500px] relative w-full  lg:w-80 xl:w-full' onSubmit={handleSearchSubmit}>
               <input
                 type='text'
                 placeholder='Search for products...'
                 autoComplete='off'
+                value={searchValue}
+                onChange={handleSearchChange}
                 className='w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:to-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400'
               />
               <div className='absolute right-0 top-0 mr-3 flex h-full items-center'>

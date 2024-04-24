@@ -1,54 +1,43 @@
-/* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useSearch } from './SearchContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateSearchKeyword, clearSearchKeyword } from '../../redux/counter/searchSlice.slice'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import CartItem from '../Cart/CartItem'
 import HomeMobile from './HeaderModal'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openCart, setOpenCart] = useState(false)
-  const { updateSearchKeyword, clearSearchKeyword } = useSearch()
-  // const tongleMenu
-
-  //  su ly logic search
   const [searchValue, setSearchValue] = useState('')
+  const dispatch = useAppDispatch()
+  const searchKeyword = useAppSelector((state) => state.search.searchKeyword)
+
   const navigate = useNavigate()
   const location = useLocation()
-  // bat du xu ly
-  useEffect(() => {
-    // Kiểm tra nếu đường dẫn là trang chính, xóa từ khóa tìm kiếm
-    if (location.pathname === '/') {
-      setSearchValue('')
 
-      clearSearchKeyword()
+  useEffect(() => {
+    if (location.pathname === '/') {
+      dispatch(clearSearchKeyword())
+      // truyền vào dispatch để clear searchKeyword khi chuyển từ trang khác về trang chủ
+      setSearchValue('')
     }
-  }, [location.pathname, clearSearchKeyword])
+  }, [location.pathname, dispatch])
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('searchVawwlue', e.target.value)
-    setSearchValue(e.target.value)
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setSearchValue(value)
   }
 
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // Gọi hàm updateSearchKeyword để cập nhật từ khóa tìm kiếm
-    updateSearchKeyword(searchValue)
-    console.log('searchValue', searchValue)
-    // setSearchValue('')
-    // Chuyển qua trang list-products và bao gồm từ khóa tìm kiếm trong URL
-    tongleMenu()
+    dispatch(updateSearchKeyword(searchValue))
+    toggleMenu()
     navigate(`/list-products?search=${encodeURIComponent(searchValue)}`)
-    // khi từ list-products trở về trang chủ thì xóa từ khóa tìm kiếm trên input
-    //  phải là từ trang khác trở về trang chủ thì mới xóa từ khóa tìm kiếm
-  }
-  // end
-  const tongleMenu = () => {
-    setIsMenuOpen(false)
   }
 
   const handleCloseCart = () => {
@@ -58,7 +47,7 @@ const Header = () => {
   return (
     <header>
       <nav className='relative flex items-center justify-between p-4 lg:px-6 '>
-        {/* item for- mobile */}
+        {/* item for mobile */}
         <button
           className='flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white '
           onClick={() => setIsMenuOpen(true)}
@@ -79,7 +68,7 @@ const Header = () => {
         {/* dialog mobile component  */}
         <HomeMobile
           openMenuDialog={isMenuOpen}
-          handleClose={tongleMenu}
+          handleClose={toggleMenu}
           handleSearchChange={handleSearchChange}
           handleSearchSubmit={handleSearchSubmit}
           searchValue={searchValue}
@@ -191,4 +180,5 @@ const Header = () => {
     </header>
   )
 }
+
 export default Header

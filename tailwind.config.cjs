@@ -7,7 +7,7 @@ module.exports = {
         // font nào chữ l cong 1 xíu   viet giup toi 
         // barlow: [ '"PT Sans"'],
         // Ubuntu
-        barlow: [ '"Hanken Grotesk"'],
+        barlow: [ 'Geist'],
 
       }
     },

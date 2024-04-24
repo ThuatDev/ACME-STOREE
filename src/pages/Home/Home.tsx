@@ -5,7 +5,7 @@ import MainLayout from 'src/layouts/Mainlayout/MainLayout'
 import { getProduct, getProductSlider } from 'src/services/apiServices'
 import Slider from './components/Slider'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchListUsers } from 'src/redux/counter/counter.slice'
+import { searchSlice } from 'src/redux/counter/searchSlice.slice'
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
 interface Product {
   id: number
@@ -62,17 +62,15 @@ export default function Home() {
     }
   }
   // const cout = useSelector((state: any) => state.counter)\
-  const cout = useAppSelector((state) => state.product)
-  console.log('cout', cout)
-  useEffect(() => {
-    dispatch(fetchListUsers())
-  }, [])
+  // const cout = useAppSelector((state) => state.product)
+  // console.log('cout', cout)
+  // useEffect(() => {}, [])
   const dispatch = useAppDispatch()
 
   return (
     <>
       {/* <p> {cout.value}</p> */}
-      <button>+</button>
+
       <section className='mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 [&>*:nth-child(1)]:md:col-span-4 [&>*:nth-child(1)]:md:row-span-2 [&>*:nth-child(2)]:md:col-span-2 [&>*:nth-child(2)]:md:row-span-1 [&>*:nth-child(3)]:md:col-span-2 [&>*:nth-child(3)]:md:row-span-1'>
         {isLoading ? (
           <>

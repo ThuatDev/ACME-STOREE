@@ -2,11 +2,23 @@
 @tailwind components;
 @layer base {
   /* Import GeistSans và GeistMono vào đây */
- 	body {
-		@apply font-barlow 
-	}
+  @font-face {
+    font-family: 'Geist';
+    src: url('./utils/font/Geist-Regular.woff2') format('woff2'),
+        url('./utils/font/Geist-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
+  body {
+    /* Thay đổi font-family của body */
+    font-family: 'Geist', sans-serif; /* Sử dụng Geist và sau đó fallback là font sans-serif */
+    /* Ví dụ về áp dụng class của Tailwind CSS */
+    @apply font-barlow;
+  }
 }
+
 
 
 @layer components {

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -17,7 +18,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+.gpu-acceleration-enabled {
+  will-change: transform;
+}
 a {
   font-weight: 500;
   /* color: #646cff; */

@@ -121,7 +121,7 @@ const Productdetail = () => {
                 </button>
                 <button
                   aria-disabled='true'
-                  disabled=''
+                  disabled
                   title='Color Blue (Out of Stock)'
                   className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700'
                 >
@@ -157,7 +157,7 @@ const Productdetail = () => {
                   aria-disabled='true'
                   title='Size L (Out of Stock)'
                   className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700'
-                  disabled=''
+                  disabled
                 >
                   L
                 </button>
@@ -215,7 +215,7 @@ const Productdetail = () => {
         </div>
         <div className='py-8'>
         <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
-        <ul className='flex animate-carousel gap-4'>
+        <ul className='flex  gap-4 overflow-x-auto'>
           <li className='aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5'>
             <Link className='relative h-full w-full' to='/'>
               <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black relative border-neutral-200 dark:border-neutral-800'>

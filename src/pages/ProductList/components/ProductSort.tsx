@@ -54,7 +54,9 @@ const ProductSort = ({ handleSortChange }: { handleSortChange: (sortOption: stri
           <ul className='md:hidden'>
             <div className='relative'>
               <div
-                className='flex w-full items-center justify-between rounded border border-black/30 px-4 py-2 text-sm dark:border-white/30 cursor-pointer'
+                className={`flex w-full items-center justify-between rounded border border-black/30 px-4 py-2 text-sm dark:border-white/30 cursor-pointer ${
+                  showMobileSort ? 'bg-gray-200 dark:bg-gray-800' : ''
+                }`}
                 onClick={toggleMobileSort}
               >
                 <div>Relevance</div>
@@ -72,31 +74,31 @@ const ProductSort = ({ handleSortChange }: { handleSortChange: (sortOption: stri
                 </svg>
               </div>
               {showMobileSort && (
-                <div className='absolute z-40 w-full rounded-b-md bg-white p-4 shadow-md dark:bg-black'>
-                  <li className='mt-2 flex text-sm text-black dark:text-white'>
-                    <p className='w-full hover:underline hover:underline-offset-4 underline underline-offset-4'>
-                      Relevance
-                    </p>
+                <div className='absolute z-40 w-full rounded-b-md bg-white p-4 shadow-md dark:bg-black '>
+                  <li
+                    className={`mt-2 flex text-sm text-black dark:text-white cursor-pointer ${
+                      activeSortOption === 'default' ? 'font-bold underline' : ''
+                    }`}
+                    onClick={() => handleClick('default')}
+                  >
+                    <p className='w-full '>Relevance</p>
                   </li>
-                  <li className='mt-2 flex text-sm text-black dark:text-white'>
-                    <a className='w-full hover:underline hover:underline-offset-4' href='/search?sort=trending-desc'>
-                      Trending
-                    </a>
+
+                  <li
+                    className={`mt-2 flex text-sm text-black dark:text-white cursor-pointer ${
+                      activeSortOption === 'price_asc' ? 'font-bold underline' : ''
+                    }`}
+                    onClick={() => handleClick('price_asc')}
+                  >
+                    <p className='w-full  '>Price: Low to high</p>
                   </li>
-                  <li className='mt-2 flex text-sm text-black dark:text-white'>
-                    <a className='w-full hover:underline hover:underline-offset-4' href='/search?sort=latest-desc'>
-                      Latest arrivals
-                    </a>
-                  </li>
-                  <li className='mt-2 flex text-sm text-black dark:text-white'>
-                    <a className='w-full hover:underline hover:underline-offset-4' href='/search?sort=price-asc'>
-                      Price: Low to high
-                    </a>
-                  </li>
-                  <li className='mt-2 flex text-sm text-black dark:text-white'>
-                    <a className='w-full hover:underline hover:underline-offset-4' href='/search?sort=price-desc'>
-                      Price: High to low
-                    </a>
+                  <li
+                    className={`mt-2 flex text-sm text-black dark:text-white cursor-pointer ${
+                      activeSortOption === 'price_desc' ? 'font-bold underline' : ''
+                    }`}
+                    onClick={() => handleClick('price_desc')}
+                  >
+                    <p className='w-full  '>Price: High to low</p>
                   </li>
                 </div>
               )}

@@ -5,7 +5,10 @@ module.exports = {
    extend: {
       fontFamily: {
         // font nào chữ l cong 1 xíu   viet giup toi 
-        'geist-sans': ['"Embed code"', 'sans-serif'], 
+        // barlow: [ '"PT Sans"'],
+        // Ubuntu
+        barlow: [ '"Hanken Grotesk"'],
+
       }
     },
   },

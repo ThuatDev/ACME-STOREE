@@ -1,124 +1,43 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import CartItem from '../Cart/CartItem'
+import HomeMobile from './HeaderModal'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+  const [openCart, setOpenCart] = useState(false)
   // const tongleMenu
 
   const tongleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
+    setIsMenuOpen(false)
   }
 
-  
+  const handleCloseCart = () => {
+    setOpenCart(false)
+  }
+
   return (
     <header>
-      <nav className='relative flex items-center justify-between p-4 lg:px-6'>
-        <div className='block flex-none md:hidden'>
-          <button
-            onClick={tongleMenu}
-            className='flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white'
-          >
-            {isMenuOpen ? (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1.5'
-                stroke='currentColor'
-                aria-hidden='true'
-                data-slot='icon'
-                className='h-6'
-              >
-                <path strokeLinecap='round' strokeLinejoin='round' d='M6 18 18 6M6 6l12 12'></path>
-              </svg>
-            ) : (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1.5'
-                stroke='currentColor'
-                aria-hidden='true'
-                data-slot='icon'
-                className='h-4'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
-                ></path>
-              </svg>
-            )}
-          </button>
-          <div
-          className={`z-50 fixed space-y-4 px-4 mt-16 py-7 flex h-full w-full flex-col bg-white pb-6 dark:bg-black ${
-            isMenuOpen ? 'block fixed top-0 left-0 right-0' : 'hidden'
-          }`}
-        >
-          <div className='mb-4 w-full'>
-            <form className='w-max-[550px] relative w-full lg:w-80 xl:w-full'>
-              <input
-                placeholder='Search for products...'
-                autoComplete='off'
-                className='w-full rounded-lg border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 dark:border-neutral-800 dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400'
-                type='text'
-                value=''
-                name='search'
-              />
-              <div className='absolute right-0 top-0 mr-3 flex h-full items-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  aria-hidden='true'
-                  data-slot='icon'
-                  className='h-4'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
-                  ></path>
-                </svg>
-              </div>
-            </form>
-          </div>
-          <ul className='flex w-full flex-col md:items-center'>
-            <li>
-              <Link
-                to={'/list-products'}
-                className='text-white underline-offset-4 hover:text-black hover:underline  dark:hover:text-neutral-300'
-              >
-                All
-              </Link>
-            </li>
-            <li>
-              <Link
-                to='/'
-                className='text-white underline-offset-4 hover:text-black hover:underline  dark:hover:text-neutral-300'
-              >
-                Shirts
-              </Link>
-            </li>
-            <li>
-              <Link
-                to='/'
-                className='text-white underline-offset-4 hover:text-black hover:underline  dark:hover:text-neutral-300'
-              >
-                Stickers
-              </Link>
-            </li>
-          </ul>
-        </div>
-        </div>
+      <nav className='relative flex items-center justify-between p-4 lg:px-6 '>
         {/* item for- mobile */}
-
-        
-
+        <button className='flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white ' onClick={() => setIsMenuOpen(true)}>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth='1.5'
+            stroke='currentColor'
+            aria-hidden='true'
+            data-slot='icon'
+            className='h-4'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'></path>
+          </svg>
+        </button>
+      {/* dialog mobile component  */}
+      <HomeMobile openMenuDialog={isMenuOpen} handleClose={tongleMenu} />
+      {/* /////////////////////// */}
         {/* item for desktop */}
         <div className='flex w-full items-center'>
           <div className='flex w-full md:w-1/3'>
@@ -145,7 +64,7 @@ const Header = () => {
                   to='/list-products'
                   className='text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300'
                 >
-                  ALL
+                  All
                 </Link>
               </li>
               <li>
@@ -195,7 +114,7 @@ const Header = () => {
             </form>
           </div>
           <div className='flex justify-end md:w-1/3'>
-            <button aria-label='Open cart'>
+            <button aria-label='Open cart' onClick={() => setOpenCart(true)}>
               <div className='relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -215,6 +134,8 @@ const Header = () => {
                 </svg>
               </div>
             </button>
+
+            <CartItem openDialog={openCart} handleClose={handleCloseCart} />
           </div>
         </div>
       </nav>

@@ -29,7 +29,8 @@ export default function useRouteElements() {
       {
         path:'DetailProduct',
         element:<Productdetail />
-      }
+      },
+      
       ]
     }
   ])

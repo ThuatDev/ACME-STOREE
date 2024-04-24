@@ -16,6 +16,7 @@ interface ProductListCategory {
       count: number
     }
   ]
+  test?: string
 }
 
 interface ProductListProps {

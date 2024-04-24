@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint no-use-before-define: 0 */ // --> OFF
 import React, { useState } from 'react'
 
@@ -45,8 +47,8 @@ const ProductSort: React.FC<ProductSortProps> = ({ handleSortChange }) => {
             {sortOptions.map((option) => (
               <li
                 key={option.value}
-                className={`mt-2 flex text-sm dark:text-white cursor-pointer ${
-                  activeSortOption === option.value ? 'text-black font-bold underline' : 'text-black dark:text-white'
+                className={`mt-2 w-full flex text-sm dark:text-white cursor-pointer underline-offset-4 ${
+                  activeSortOption === option.value ? 'text-black underline' : 'text-black dark:text-white hover:underline'
                 }`}
                 onClick={() => handleClick(option.value)}
                 onKeyPress={(event) => handleKeyPress(event, option.value)}

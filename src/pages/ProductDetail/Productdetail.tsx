@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import Slider from '../Home/components/Slider'
 import { getProductSlider } from 'src/services/apiServices'
+import Slider_01 from './Slider_01'
 const ProductDetail = () => {
   type Product = {
     id: number
@@ -312,7 +313,7 @@ const ProductDetail = () => {
             </form>
           </div>
         </div>
-        <Slider sliderItem={sliderItem} />
+        <Slider_01 sliderItem={sliderItem} />
       </div>
     </>
   )

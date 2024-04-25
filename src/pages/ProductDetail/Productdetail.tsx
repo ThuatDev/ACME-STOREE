@@ -312,6 +312,7 @@ const ProductDetail = () => {
             </form>
           </div>
         </div>
+        <Slider sliderItem={sliderItem} />
       </div>
     </>
   )

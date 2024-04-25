@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
 import ProductItem from './ProductItem'
-// import { useSearch } from 'src/components/Header/SearchContext'
-import { updateSearchKeyword, clearSearchKeyword } from '../../../redux/seach/searchSlice.slice'
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
+
 interface ProductListCategory {
   id: number
   title: string
@@ -11,12 +9,10 @@ interface ProductListCategory {
   description: string
   category: string
   image: string
-  rating: [
-    {
-      rate: number
-      count: number
-    }
-  ]
+  rating: {
+    rate: number
+    count: number
+  }
 }
 
 interface ProductListProps {
@@ -27,8 +23,6 @@ interface ProductListProps {
 const ProductList = ({ selectedCategory, sortOption }: ProductListProps) => {
   const [products, setProducts] = useState<ProductListCategory[]>([])
   const [loading, setLoading] = useState(true)
-  // const { searchKeyword } = useSearch()
-  const dispatch = useAppDispatch()
   const searchKeyword = useAppSelector((state) => state.search.searchKeyword)
 
   useEffect(() => {
@@ -47,13 +41,6 @@ const ProductList = ({ selectedCategory, sortOption }: ProductListProps) => {
     fetchData()
   }, [])
 
-  // let filteredProducts = products
-  // search theo category và searchKeyword dù không có searchKeyword thì vẫn lọc theo category dc
-  // const filteredProducts = products.filter(
-  //   (product) =>
-  //     product.title.toLowerCase().includes(searchKeyword.toLowerCase()) &&
-  //     (!selectedCategory || product.category === selectedCategory)
-  // )
   const filteredProducts = products
     .slice()
     .filter(
@@ -73,7 +60,13 @@ const ProductList = ({ selectedCategory, sortOption }: ProductListProps) => {
 
   return (
     <div className='order-last min-h-screen w-full md:order-none'>
-      {loading && <p className='text-center'>Loading...</p>}
+      {loading && (
+        <div className='loader'>
+          <div className='inner one'></div>
+          <div className='inner two'></div>
+          <div className='inner three'></div>
+        </div>
+      )}
       {!loading && (
         <>
           {searchKeyword && filteredProducts.length > 0 && (

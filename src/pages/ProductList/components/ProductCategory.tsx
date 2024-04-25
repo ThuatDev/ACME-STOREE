@@ -71,7 +71,7 @@ const ProductCategory: React.FC<ProductCategoryProps> = ({ setSelectedCategory }
     <div className='order-first w-full flex-none md:max-w-[125px]'>
       <h3 className='hidden text-xs text-neutral-500 md:block dark:text-neutral-400'>Collections</h3>
       {isLoading ? (
-        <div>Loading...</div>
+        <div></div>
       ) : (
         <>
           <ul className='hidden md:block'>

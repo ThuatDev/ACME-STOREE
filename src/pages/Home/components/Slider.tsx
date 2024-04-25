@@ -13,7 +13,7 @@ export default function Slider({ sliderItem }: any) {
 
   return (
     <div className='w-full overflow-x-auto pb-6 pt-1'>
-      <ul className='flex animate-carousel gap-4'>
+      <ul className='flex  gap-4'>
         {sliderItem.map((item: Product) => (
           <li
             className='relative aspect-square h-[30vh] max-h-[275px] w-2/3 max-w-[475px] flex-none md:w-1/3'

@@ -18,22 +18,22 @@ export default function Footer() {
             <nav>
                 <ul>
                     <li>
-                        <Link to='/' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300 text-black dark:text-neutral-300'>Home</Link>
+                        <Link to='/' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300'>Home</Link>
                     </li>
                     <li>
-                        <Link to='about' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300 text-black dark:text-neutral-300'>About</Link>
+                        <Link to='about' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300'>About</Link>
                     </li>
                     <li>
-                        <Link to='term-conditional' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300 text-black dark:text-neutral-300'>Terms & Conditions</Link>
+                        <Link to='term-conditional' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300'>Terms & Conditions</Link>
                     </li>
                     <li>
-                        <Link to='shipping-return-policies' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300 text-black dark:text-neutral-300'>Shipping & Return Policy</Link>
+                        <Link to='shipping-return-policies' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300'>Shipping & Return Policy</Link>
                     </li>
                     <li>
-                        <Link to='prvaicy-polices' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300 text-black dark:text-neutral-300'>Privacy Policy</Link>
+                        <Link to='prvaicy-polices' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300'>Privacy Policy</Link>
                     </li>
                     <li>
-                        <Link to='FAQ' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300 text-black dark:text-neutral-300'>FAQ</Link>
+                        <Link to='FAQ' className='block p-2 text-lg underline-offset-4 hover:text-black hover:underline md:inline-block md:text-sm dark:hover:text-neutral-300'>FAQ</Link>
                     </li>
                 </ul>
             </nav>

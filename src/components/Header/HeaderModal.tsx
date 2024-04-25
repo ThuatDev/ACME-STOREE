@@ -95,30 +95,16 @@ const HomeMobile = ({
                         </form>
                       </div>
                       <ul className=' gap-6 text-sm md:flex md:items-center'>
-                        <li>
-                          <Link
-                            to='/list-products'
-                            onClick={handleClose}
-                            className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'
-                          >
+                        <li className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'>
+                          <Link to='/list-products' onClick={handleClose}>
                             All
                           </Link>
                         </li>
-                        <li>
-                          <Link
-                            to='/'
-                            className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'
-                          >
-                            Shirts
-                          </Link>
+                        <li className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'>
+                          <Link to='/'>Shirts</Link>
                         </li>
-                        <li>
-                          <Link
-                            to='/'
-                            className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'
-                          >
-                            Stickers
-                          </Link>
+                        <li className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'>
+                          <Link to='/'>Stickers</Link>
                         </li>
                       </ul>
                     </div>

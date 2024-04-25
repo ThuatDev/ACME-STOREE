@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateSearchKeyword, clearSearchKeyword } from '../../redux/counter/searchSlice.slice'
+import { updateSearchKeyword, clearSearchKeyword } from '../../redux/seach/searchSlice.slice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import CartItem from '../Cart/CartItem'
 import HomeMobile from './HeaderModal'

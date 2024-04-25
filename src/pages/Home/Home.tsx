@@ -5,7 +5,7 @@ import MainLayout from 'src/layouts/Mainlayout/MainLayout'
 import { getProduct, getProductSlider } from 'src/services/apiServices'
 import Slider from './components/Slider'
 import { useSelector, useDispatch } from 'react-redux'
-import { searchSlice } from 'src/redux/counter/searchSlice.slice'
+import { searchSlice } from 'src/redux/seach/searchSlice.slice'
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
 interface Product {
   id: number

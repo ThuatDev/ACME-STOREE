@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { count } from 'console'
-import search from './counter/searchSlice.slice'
+import search from './seach/searchSlice.slice'
 // ...
 
 export const store = configureStore({

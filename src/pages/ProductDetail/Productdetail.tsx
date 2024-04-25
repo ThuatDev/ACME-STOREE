@@ -30,6 +30,7 @@ const ProductDetail = () => {
   const productId = (id as string).split('-').pop() // Lấy id từ phần cuối của URL
   console.log('productId:', productId)
   const [product, setProduct] = useState<Product | null>(null)
+  const [sliderItems, setSliderItems] = useState<Product[]>([])
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -49,6 +50,42 @@ const ProductDetail = () => {
     fetchProduct()
   }, [productId])
   fetch(`https://fakestoreapi.com/products/${id}`)
+
+  const imagesSliderItem = [
+    'https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Ft-shirt-1.png%3Fv%3D1689798965&w=1200&q=75',
+    'https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Ft-shirt-2.png%3Fv%3D1689798965&w=1200&q=75',
+    'https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Ft-shirt-circles-blue.png%3Fv%3D1690003396&w=1200&q=75'
+  ]
+  const [itemSliderChild, setItemSliderChild] = useState<string[]>([])
+
+  const handleSlider = (index: number) => {
+    const item = imagesSliderItem[index]
+    console.log('item:', item)
+    // nhận vào img vừa được click và thay đổi liên tục khi click vào img khác
+    setItemSliderChild([item])
+    console.log('itemSliderChild:', itemSliderChild)
+  }
+  // options color
+  const [selectedColor, setSelectedColor] = useState('black')
+
+  // Hàm xử lý sự kiện khi một mục màu được click
+  const handleColorClick = (color: string) => {
+    setSelectedColor(color)
+  }
+  const [selectedSize, setSelectedSize] = useState('')
+
+  // Hàm xử lý sự kiện khi một nút kích thước được click
+  const handleSizeClick = (size: string) => {
+    // Kiểm tra xem size được click có giống với size đã được chọn hay không
+    if (size === selectedSize) {
+      // Nếu giống, thì xóa size đã chọn bằng cách gán giá trị rỗng
+      setSelectedSize('')
+    } else {
+      // Nếu không, thì chọn size mới bằng cách gán giá trị mới
+      setSelectedSize(size)
+    }
+  }
+
   return (
     <>
       <div className='mx-auto max-w-screen-2xl px-4'>
@@ -56,15 +93,18 @@ const ProductDetail = () => {
           <div className='h-full w-full basis-full lg:basis-4/6'>
             <div className='relative aspect-square h-full max-h-[550px] w-full overflow-hidden'>
               <img
-                className='h-full w-full object-contain'
+                className='h-full w-full object-contain transition duration-300 ease-in-out transform hover:scale-105'
                 sizes='(min-width: 1024px) 66vw, 100vw'
-                src={product?.image}
+                // src={product?.image}
+                // viết điều kiện nếu handleSlider được click thì hiển thị itemSliderChild đã được set ở trên nếu không thì hiển thị product?.image và cứ ngược lại như thế cho tôi
+                src={itemSliderChild.length > 0 ? itemSliderChild[0] : product?.image}
                 alt={product?.title}
               />
+              {/* slider item arrow  */}
               <div className='absolute bottom-[15%] flex w-full justify-center'>
                 <div className='mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80'>
                   <Link
-                    to='/'
+                    to=''
                     aria-label='Previous product image'
                     className='h-full px-6 transition-all ease-in-out hover:scale-110 hover:text-black dark:hover:text-white flex items-center justify-center'
                   >
@@ -83,7 +123,7 @@ const ProductDetail = () => {
                   </Link>
                   <div className='mx-1 h-6 w-px bg-neutral-500'></div>
                   <Link
-                    to='/'
+                    to=''
                     aria-label='Previous product image'
                     className='h-full px-6 transition-all ease-in-out hover:scale-110 hover:text-black dark:hover:text-white flex items-center justify-center'
                   >
@@ -102,42 +142,25 @@ const ProductDetail = () => {
                   </Link>
                 </div>
               </div>
+              {/* end  */}
             </div>
+            {/* slider item img  */}
             <ul className='my-12 flex items-center justify-center gap-2 overflow-auto py-1 lg:mb-0'>
-              <li className='h-20 w-20'>
-                <Link to='/' className='h-full w-full'>
-                  <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black border-neutral-200 dark:border-neutral-800'>
-                    <img
-                      className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105'
-                      src='https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Ft-shirt-1.png%3Fv%3D1689798965&w=96&q=75'
-                      alt=''
-                    />
-                  </div>
-                </Link>
-              </li>
-              <li className='h-20 w-20'>
-                <Link to='/' className='h-full w-full'>
-                  <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black border-neutral-200 dark:border-neutral-800'>
-                    <img
-                      className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105'
-                      src='https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Ft-shirt-circles-blue.png%3Fv%3D1690003396&w=96&q=75'
-                      alt=''
-                    />
-                  </div>
-                </Link>
-              </li>
-              <li className='h-20 w-20'>
-                <Link to='/' className='h-full w-full'>
-                  <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black border-neutral-200 dark:border-neutral-800'>
-                    <img
-                      className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105'
-                      src='https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Ft-shirt-2.png%3Fv%3D1689798965&w=96&q=75'
-                      alt=''
-                    />
-                  </div>
-                </Link>
-              </li>
+              {imagesSliderItem.map((item, index) => (
+                <li className='h-20 w-20' key={index}>
+                  <Link to='' className='h-full w-full' onClick={() => handleSlider(index)}>
+                    <div className='group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black border-neutral-200 dark:border-neutral-800'>
+                      <img
+                        className='relative h-full w-full object-contain transition duration-300 ease-in-out group-hover:scale-105'
+                        src={item}
+                        alt=''
+                      />
+                    </div>
+                  </Link>
+                </li>
+              ))}
             </ul>
+            {/* end slider item img    */}
           </div>
           <div className='basis-full lg:basis-2/6'>
             <div className='mb-6 flex flex-col border-b pb-6 dark:border-neutral-700'>
@@ -152,24 +175,33 @@ const ProductDetail = () => {
               <dt className='mb-4 text-sm uppercase tracking-wide'>Color</dt>
               <dd className='flex flex-wrap gap-3'>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedColor === 'black'}
                   title='Color Black'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 '
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedColor === 'black' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleColorClick('black')}
                 >
                   Black
                 </button>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedColor === 'white'}
                   title='Color White'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 cursor-default ring-2 ring-blue-600'
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedColor === 'white' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleColorClick('white')}
                 >
                   White
                 </button>
                 <button
-                  aria-disabled='true'
+                  aria-disabled={selectedColor === 'blue'}
                   disabled
                   title='Color Blue (Out of Stock)'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700'
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700 ${
+                    selectedColor === 'blue' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  }`}
+                  onClick={() => handleColorClick('blue')}
                 >
                   Blue
                 </button>
@@ -179,52 +211,73 @@ const ProductDetail = () => {
               <dt className='mb-4 text-sm uppercase tracking-wide'>Size</dt>
               <dd className='flex flex-wrap gap-3'>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedSize === 'XS'}
                   title='Size XS'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 '
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedSize === 'XS' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleSizeClick('XS')}
                 >
                   XS
                 </button>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedSize === 'S'}
                   title='Size S'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 cursor-default ring-2 ring-blue-600'
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedSize === 'S' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } cursor-default ring-2`}
+                  onClick={() => handleSizeClick('S')}
                 >
                   S
                 </button>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedSize === 'M'}
                   title='Size M'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 '
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedSize === 'M' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleSizeClick('M')}
                 >
                   M
                 </button>
                 <button
-                  aria-disabled='true'
+                  aria-disabled={selectedSize === 'L'}
                   title='Size L (Out of Stock)'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700'
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700 ${
+                    selectedSize === 'L' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  }`}
                   disabled
+                  onClick={() => handleSizeClick('L')}
                 >
                   L
                 </button>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedSize === 'XL'}
                   title='Size XL'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 '
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedSize === 'XL' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleSizeClick('XL')}
                 >
                   XL
                 </button>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedSize === 'XXL'}
                   title='Size XXL'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 '
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedSize === 'XXL' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleSizeClick('XXL')}
                 >
                   XXL
                 </button>
                 <button
-                  aria-disabled='false'
+                  aria-disabled={selectedSize === 'XXXL'}
                   title='Size XXXL'
-                  className='flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 '
+                  className={`flex min-w-[48px] items-center justify-center rounded-full border bg-neutral-100 px-2 py-1 text-sm dark:border-neutral-800 dark:bg-neutral-900 ${
+                    selectedSize === 'XXXL' ? 'ring-2 ring-blue-600' : 'ring-1 ring-transparent'
+                  } transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 `}
+                  onClick={() => handleSizeClick('XXXL')}
                 >
                   XXXL
                 </button>
@@ -259,7 +312,6 @@ const ProductDetail = () => {
             </form>
           </div>
         </div>
-        <Slider sliderItem={sliderItem} />
       </div>
     </>
   )

@@ -51,7 +51,7 @@ export const searchSlice = createSlice({
       state.searchKeyword = action.payload;
     },
     clearSearchKeyword: (state) => {
-      state.searchKeyword = ' ';
+      state.searchKeyword = '';
     },
   },
 });

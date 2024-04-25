@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Geist';
-    src: url('Geist-Regular.woff2') format('woff2'),
-        url('Geist-Regular.woff') format('woff');
-    font-weight: normal;
+    src: url('Geist-Medium.woff2') format('woff2'),
+        url('Geist-Medium.woff') format('woff');
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
 }

@@ -55,14 +55,14 @@ const ProductSort: React.FC<ProductSortProps> = ({ handleSortChange }) => {
       {showComponent && ( // Render component only if showComponent is true
         <div className='order-none flex-none md:order-last md:w-[125px] '>
           <nav>
-            <h3 className='hidden text-xs text-neutral-500 md:block dark:text-neutral-400'>Sort By:</h3>
+            <h3 className='hidden text-xs text-neutral-500 md:block dark:text-neutral-400'>Sort by</h3>
             <ul className='hidden md:block'>
               {sortOptions.map((option) => (
                 <li key={option.value}>
                   <Link
                     to='#'
-                    className={`mt-2 flex text-sm dark:text-white cursor-pointer ${
-                      activeSortOption === option.value ? 'text-black underline' : 'text-black dark:text-white'
+                    className={`mt-2 flex text-sm dark:text-white cursor-pointer hover:underline hover:underline-offset-4  ${
+                      activeSortOption === option.value ? 'text-black underline underline-offset-4 ' : 'text-black dark:text-white '
                     }`}
                     onClick={() => handleClick(option.value)}
                     onKeyPress={(event) => handleKeyPress(event, option.value)}

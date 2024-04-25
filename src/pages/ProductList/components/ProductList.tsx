@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import ProductItem from './ProductItem'
-import { useSearch } from 'src/components/Header/SearchContext'
-
+// import { useSearch } from 'src/components/Header/SearchContext'
+import { updateSearchKeyword, clearSearchKeyword } from '../../../redux/seach/searchSlice.slice'
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
 interface ProductListCategory {
   id: number
   title: string
@@ -26,7 +27,9 @@ interface ProductListProps {
 const ProductList = ({ selectedCategory, sortOption }: ProductListProps) => {
   const [products, setProducts] = useState<ProductListCategory[]>([])
   const [loading, setLoading] = useState(true)
-  const { searchKeyword } = useSearch()
+  // const { searchKeyword } = useSearch()
+  const dispatch = useAppDispatch()
+  const searchKeyword = useAppSelector((state) => state.search.searchKeyword)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,16 +71,6 @@ const ProductList = ({ selectedCategory, sortOption }: ProductListProps) => {
       }
     })
 
-  // v2
-  // if (searchKeyword && searchKeyword.trim() !== '') {
-  //   filteredProducts = products.filter((product) => {
-  //     if (selectedCategory) {
-  //       return product.category === selectedCategory
-  //     } else {
-  //       return product.title.toLowerCase().includes(searchKeyword.toLowerCase())
-  //     }
-  //   })
-  // }
   return (
     <div className='order-last min-h-screen w-full md:order-none'>
       {loading && <p className='text-center'>Loading...</p>}

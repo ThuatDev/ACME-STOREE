@@ -16,7 +16,7 @@ const CategoryList: React.FC<{
         <NavLink
           to={category === 'All' ? '/list-products' : `/list-products?category=${category}`}
           className={`w-full text-sm underline-offset-4 hover:underline capitalize ${
-            selectedCategory === category ? ' font-bold underline' : ''
+            selectedCategory === category ? '  underline' : ''
           }`}
           onClick={() => handleClickCategory(category)}
         >

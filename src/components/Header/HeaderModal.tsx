@@ -98,6 +98,7 @@ const HomeMobile = ({
                         <li>
                           <Link
                             to='/list-products'
+                            onClick={handleClose}
                             className='py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white'
                           >
                             All
